@@ -11,6 +11,7 @@ import java.util.UUID;
 public class HealthRecord {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @OneToOne

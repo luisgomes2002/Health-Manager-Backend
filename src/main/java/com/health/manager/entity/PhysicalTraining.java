@@ -1,10 +1,7 @@
 package com.health.manager.entity;
 
 import com.health.manager.users.entity.StudentProfile;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -12,6 +9,7 @@ import java.util.UUID;
 public class PhysicalTraining {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @OneToOne

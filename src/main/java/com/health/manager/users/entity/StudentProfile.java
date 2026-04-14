@@ -12,6 +12,7 @@ import java.util.UUID;
 public class StudentProfile {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @OneToOne
