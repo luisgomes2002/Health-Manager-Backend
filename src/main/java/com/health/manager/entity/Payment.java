@@ -1,7 +1,9 @@
 package com.health.manager.entity;
 
-import com.health.manager.Enum.PaymentStatus;
-import com.health.manager.Enum.ProfessionalType;
+import com.health.manager.enums.PaymentStatus;
+import com.health.manager.enums.ProfessionalType;
+import com.health.manager.users.entity.StudentProfile;
+import com.health.manager.users.entity.Users;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

@@ -1,5 +1,6 @@
-package com.health.manager.entity;
+package com.health.manager.users.entity;
 
+import com.health.manager.entity.*;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

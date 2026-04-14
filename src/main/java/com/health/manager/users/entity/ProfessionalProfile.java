@@ -1,6 +1,6 @@
-package com.health.manager.entity;
+package com.health.manager.users.entity;
 
-import com.health.manager.Enum.RegistrationType;
+import com.health.manager.enums.RegistrationType;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

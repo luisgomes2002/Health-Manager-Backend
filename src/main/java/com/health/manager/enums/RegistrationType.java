@@ -1,4 +1,4 @@
-package com.health.manager.Enum;
+package com.health.manager.enums;
 
 public enum RegistrationType {
     CREF,

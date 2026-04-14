@@ -1,5 +1,6 @@
 package com.health.manager.entity;
 
+import com.health.manager.users.entity.StudentProfile;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

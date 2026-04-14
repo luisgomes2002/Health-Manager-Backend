@@ -1,5 +1,6 @@
 package com.health.manager.entity;
 
+import com.health.manager.users.entity.StudentProfile;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
