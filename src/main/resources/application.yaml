@@ -1,3 +1,20 @@
 spring:
   application:
     name: manager
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/health-manager-db
+    username: postgres
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  JPA:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
