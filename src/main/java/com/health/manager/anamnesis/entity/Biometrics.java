@@ -1,6 +1,6 @@
-package com.health.manager.entity;
+package com.health.manager.anamnesis.entity;
 
-import com.health.manager.users.entity.StudentProfile;
+import com.health.manager.users.entity.Students;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -14,21 +14,19 @@ public class Biometrics {
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "student_profile_id", unique = true)
-    private StudentProfile studentProfile;
+    @JoinColumn(name = "student_id", unique = true)
+    private Students students;
 
     private LocalDateTime dateOfBirth;
-
     private String biologicalSex;
-
     private String menstrualCycleImpact;
 
     public Biometrics() {
     }
 
-    public Biometrics(UUID id, StudentProfile studentProfile, LocalDateTime dateOfBirth, String biologicalSex, String menstrualCycleImpact) {
+    public Biometrics(UUID id, Students students, LocalDateTime dateOfBirth, String biologicalSex, String menstrualCycleImpact) {
         this.id = id;
-        this.studentProfile = studentProfile;
+        this.students = students;
         this.dateOfBirth = dateOfBirth;
         this.biologicalSex = biologicalSex;
         this.menstrualCycleImpact = menstrualCycleImpact;
@@ -42,12 +40,12 @@ public class Biometrics {
         this.id = id;
     }
 
-    public StudentProfile getStudentProfile() {
-        return studentProfile;
+    public Students getStudent() {
+        return students;
     }
 
-    public void setStudentProfile(StudentProfile studentProfile) {
-        this.studentProfile = studentProfile;
+    public void setStudent(Students students) {
+        this.students = students;
     }
 
     public LocalDateTime getDateOfBirth() {

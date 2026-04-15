@@ -1,23 +1,21 @@
-package com.health.manager.entity;
+package com.health.manager.anamnesis.entity;
 
-import com.health.manager.users.entity.StudentProfile;
+import com.health.manager.users.entity.Students;
 import jakarta.persistence.*;
 
 import java.util.UUID;
 
 @Entity
 public class PhysicalTraining {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "student_profile_id", unique = true)
-    private StudentProfile studentProfile;
+    @JoinColumn(name = "student_id", unique = true)
+    private Students students;
 
     private Integer activityLevel;
-
     private String weeklyFrequency;
     private String currentActivities;
     private String goals;
@@ -30,9 +28,9 @@ public class PhysicalTraining {
     public PhysicalTraining() {
     }
 
-    public PhysicalTraining(UUID id, StudentProfile studentProfile, Integer activityLevel, String weeklyFrequency, String currentActivities, String goals, String perceivedImpact, String bodyComfort, String exerciseRestriction, String restrictedExercise, String preferredShift) {
+    public PhysicalTraining(UUID id, Students students, Integer activityLevel, String weeklyFrequency, String currentActivities, String goals, String perceivedImpact, String bodyComfort, String exerciseRestriction, String restrictedExercise, String preferredShift) {
         this.id = id;
-        this.studentProfile = studentProfile;
+        this.students = students;
         this.activityLevel = activityLevel;
         this.weeklyFrequency = weeklyFrequency;
         this.currentActivities = currentActivities;
@@ -52,12 +50,12 @@ public class PhysicalTraining {
         this.id = id;
     }
 
-    public StudentProfile getStudentProfile() {
-        return studentProfile;
+    public Students getStudent() {
+        return students;
     }
 
-    public void setStudentProfile(StudentProfile studentProfile) {
-        this.studentProfile = studentProfile;
+    public void setStudent(Students students) {
+        this.students = students;
     }
 
     public Integer getActivityLevel() {

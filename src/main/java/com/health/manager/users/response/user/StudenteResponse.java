@@ -1,13 +1,19 @@
 package com.health.manager.users.response.user;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class StudentProfileResponse {
+public class StudenteResponse {
     private UUID id;
+
     private UUID coachId;
     private String coachName;
+
     private UUID nutritionistId;
     private String nutritionistName;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public UUID getId() {
         return id;

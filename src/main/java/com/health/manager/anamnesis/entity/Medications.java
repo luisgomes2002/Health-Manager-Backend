@@ -1,4 +1,4 @@
-package com.health.manager.entity;
+package com.health.manager.anamnesis.entity;
 
 import jakarta.persistence.*;
 
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-public class Medication {
+public class Medications {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -14,21 +14,20 @@ public class Medication {
 
     @ManyToOne
     @JoinColumn(name = "health_record_id")
-    private HealthRecord healthRecord;
+    private HealthRecords healthRecords;
 
     private String name;
-
     private String pathology;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Medication() {
+    public Medications() {
     }
 
-    public Medication(UUID id, HealthRecord healthRecord, String name, String pathology, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Medications(UUID id, HealthRecords healthRecords, String name, String pathology, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
-        this.healthRecord = healthRecord;
+        this.healthRecords = healthRecords;
         this.name = name;
         this.pathology = pathology;
         this.createdAt = createdAt;
@@ -43,12 +42,12 @@ public class Medication {
         this.id = id;
     }
 
-    public HealthRecord getHealthRecord() {
-        return healthRecord;
+    public HealthRecords getHealthRecord() {
+        return healthRecords;
     }
 
-    public void setHealthRecord(HealthRecord healthRecord) {
-        this.healthRecord = healthRecord;
+    public void setHealthRecord(HealthRecords healthRecords) {
+        this.healthRecords = healthRecords;
     }
 
     public String getName() {

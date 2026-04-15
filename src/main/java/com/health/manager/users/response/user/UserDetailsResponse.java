@@ -14,8 +14,8 @@ public class UserDetailsResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    private StudentProfileResponse studentProfile;
-    private ProfessionalProfileResponse professionalProfile;
+    private StudenteResponse student;
+    private ProfessionalResponse professional;
 
     public UUID getId() {
         return id;
@@ -25,59 +25,19 @@ public class UserDetailsResponse {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public StudenteResponse getStudent() {
+        return student;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStudent(StudenteResponse student) {
+        this.student = student;
     }
 
-    public String getEmail() {
-        return email;
+    public ProfessionalResponse getProfessional() {
+        return professional;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public StudentProfileResponse getStudentProfile() {
-        return studentProfile;
-    }
-
-    public void setStudentProfile(StudentProfileResponse studentProfile) {
-        this.studentProfile = studentProfile;
-    }
-
-    public ProfessionalProfileResponse getProfessionalProfile() {
-        return professionalProfile;
-    }
-
-    public void setProfessionalProfile(ProfessionalProfileResponse professionalProfile) {
-        this.professionalProfile = professionalProfile;
+    public void setProfessional(ProfessionalResponse professional) {
+        this.professional = professional;
     }
 }

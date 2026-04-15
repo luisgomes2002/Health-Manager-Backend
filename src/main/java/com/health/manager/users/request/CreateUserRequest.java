@@ -1,22 +1,20 @@
 package com.health.manager.users.request;
 
 import com.health.manager.enums.Role;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-
-import java.util.UUID;
+import jakarta.validation.constraints.NotNull;
 
 public class CreateUserRequest {
 
     @NotBlank
     private String name;
 
+    @Email
     @NotBlank
     private String email;
 
-    @NotBlank
+    @NotNull
     private Role role;
 
     @NotBlank

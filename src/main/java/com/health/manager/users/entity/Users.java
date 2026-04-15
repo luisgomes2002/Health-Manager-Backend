@@ -1,12 +1,9 @@
 package com.health.manager.users.entity;
 
 import com.health.manager.enums.Role;
-import com.health.manager.entity.Payment;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -29,25 +26,16 @@ public class Users {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
-    private StudentProfile studentProfile;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Students students;
 
-    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
-    private ProfessionalProfile professionalProfile;
-
-    @OneToMany(mappedBy = "coach")
-    private List<StudentProfile> studentsAsCoach = new ArrayList<>();
-
-    @OneToMany(mappedBy = "nutritionist")
-    private List<StudentProfile> studentsAsNutritionist = new ArrayList<>();
-
-    @OneToMany(mappedBy = "professional")
-    private List<Payment> receivedPayments = new ArrayList<>();
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Professionals professionals;
 
     public Users() {
     }
 
-    public Users(UUID id, String name, String email, Role role, String password, LocalDateTime createdAt, LocalDateTime updatedAt, StudentProfile studentProfile, ProfessionalProfile professionalProfile, List<StudentProfile> studentsAsCoach, List<StudentProfile> studentsAsNutritionist, List<Payment> receivedPayments) {
+    public Users(UUID id, String name, String email, Role role, String password, LocalDateTime createdAt, LocalDateTime updatedAt, Students students, Professionals professionals) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -55,22 +43,8 @@ public class Users {
         this.password = password;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.studentProfile = studentProfile;
-        this.professionalProfile = professionalProfile;
-        this.studentsAsCoach = studentsAsCoach;
-        this.studentsAsNutritionist = studentsAsNutritionist;
-        this.receivedPayments = receivedPayments;
-    }
-
-    @PrePersist
-    public void prePersist() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt = LocalDateTime.now();
+        this.students = students;
+        this.professionals = professionals;
     }
 
     public UUID getId() {
@@ -129,43 +103,19 @@ public class Users {
         this.updatedAt = updatedAt;
     }
 
-    public StudentProfile getStudentProfile() {
-        return studentProfile;
+    public Students getStudent() {
+        return students;
     }
 
-    public void setStudentProfile(StudentProfile studentProfile) {
-        this.studentProfile = studentProfile;
+    public void setStudent(Students students) {
+        this.students = students;
     }
 
-    public ProfessionalProfile getProfessionalProfile() {
-        return professionalProfile;
+    public Professionals getProfessional() {
+        return professionals;
     }
 
-    public void setProfessionalProfile(ProfessionalProfile professionalProfile) {
-        this.professionalProfile = professionalProfile;
-    }
-
-    public List<StudentProfile> getStudentsAsCoach() {
-        return studentsAsCoach;
-    }
-
-    public void setStudentsAsCoach(List<StudentProfile> studentsAsCoach) {
-        this.studentsAsCoach = studentsAsCoach;
-    }
-
-    public List<StudentProfile> getStudentsAsNutritionist() {
-        return studentsAsNutritionist;
-    }
-
-    public void setStudentsAsNutritionist(List<StudentProfile> studentsAsNutritionist) {
-        this.studentsAsNutritionist = studentsAsNutritionist;
-    }
-
-    public List<Payment> getReceivedPayments() {
-        return receivedPayments;
-    }
-
-    public void setReceivedPayments(List<Payment> receivedPayments) {
-        this.receivedPayments = receivedPayments;
+    public void setProfessional(Professionals professionals) {
+        this.professionals = professionals;
     }
 }

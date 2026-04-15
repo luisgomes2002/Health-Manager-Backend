@@ -1,6 +1,6 @@
-package com.health.manager.entity;
+package com.health.manager.anamnesis.entity;
 
-import com.health.manager.users.entity.StudentProfile;
+import com.health.manager.users.entity.Students;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class HealthRecord {
+public class HealthRecords {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "student_profile_id", unique = true)
-    private StudentProfile studentProfile;
+    @JoinColumn(name = "student_id", unique = true)
+    private Students students;
 
     private String healthIssues;
     private String hypertension;
@@ -27,15 +27,15 @@ public class HealthRecord {
 
     private Boolean dailyMedication = false;
 
-    @OneToMany(mappedBy = "healthRecord", cascade = CascadeType.ALL)
-    private List<Medication> medications = new ArrayList<>();
+    @OneToMany(mappedBy = "healthRecords", cascade = CascadeType.ALL)
+    private List<Medications> medications = new ArrayList<>();
 
-    public HealthRecord() {
+    public HealthRecords() {
     }
 
-    public HealthRecord(UUID id, StudentProfile studentProfile, String healthIssues, String hypertension, String diabetes, String cardiacIssues, String mentalHealth, String steroidUse, Boolean dailyMedication, List<Medication> medications) {
+    public HealthRecords(UUID id, Students students, String healthIssues, String hypertension, String diabetes, String cardiacIssues, String mentalHealth, String steroidUse, Boolean dailyMedication, List<Medications> medications) {
         this.id = id;
-        this.studentProfile = studentProfile;
+        this.students = students;
         this.healthIssues = healthIssues;
         this.hypertension = hypertension;
         this.diabetes = diabetes;
@@ -54,12 +54,12 @@ public class HealthRecord {
         this.id = id;
     }
 
-    public StudentProfile getStudentProfile() {
-        return studentProfile;
+    public Students getStudent() {
+        return students;
     }
 
-    public void setStudentProfile(StudentProfile studentProfile) {
-        this.studentProfile = studentProfile;
+    public void setStudent(Students students) {
+        this.students = students;
     }
 
     public String getHealthIssues() {
@@ -118,11 +118,11 @@ public class HealthRecord {
         this.dailyMedication = dailyMedication;
     }
 
-    public List<Medication> getMedications() {
+    public List<Medications> getMedications() {
         return medications;
     }
 
-    public void setMedications(List<Medication> medications) {
+    public void setMedications(List<Medications> medications) {
         this.medications = medications;
     }
 }

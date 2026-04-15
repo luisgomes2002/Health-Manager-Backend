@@ -1,9 +1,9 @@
-package com.health.manager.entity;
+package com.health.manager.anamnesis.entity;
 
 import com.health.manager.enums.PaymentStatus;
 import com.health.manager.enums.ProfessionalType;
-import com.health.manager.users.entity.StudentProfile;
-import com.health.manager.users.entity.Users;
+import com.health.manager.users.entity.Professionals;
+import com.health.manager.users.entity.Students;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-public class Payment {
+public class Payments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -19,11 +19,11 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private StudentProfile student;
+    private Students students;
 
     @ManyToOne
     @JoinColumn(name = "professional_id")
-    private Users professional;
+    private Professionals professionals;
 
     @Enumerated(EnumType.STRING)
     private ProfessionalType serviceType;
@@ -39,13 +39,13 @@ public class Payment {
 
     private LocalDateTime createdAt;
 
-    public Payment() {
+    public Payments() {
     }
 
-    public Payment(UUID id, StudentProfile student, Users professional, ProfessionalType serviceType, BigDecimal amount, LocalDateTime dueDate, LocalDateTime paymentDate, PaymentStatus status, LocalDateTime createdAt) {
+    public Payments(UUID id, Students students, Professionals professionals, ProfessionalType serviceType, BigDecimal amount, LocalDateTime dueDate, LocalDateTime paymentDate, PaymentStatus status, LocalDateTime createdAt) {
         this.id = id;
-        this.student = student;
-        this.professional = professional;
+        this.students = students;
+        this.professionals = professionals;
         this.serviceType = serviceType;
         this.amount = amount;
         this.dueDate = dueDate;
@@ -62,20 +62,20 @@ public class Payment {
         this.id = id;
     }
 
-    public StudentProfile getStudent() {
-        return student;
+    public Students getStudent() {
+        return students;
     }
 
-    public void setStudent(StudentProfile student) {
-        this.student = student;
+    public void setStudent(Students students) {
+        this.students = students;
     }
 
-    public Users getProfessional() {
-        return professional;
+    public Professionals getProfessional() {
+        return professionals;
     }
 
-    public void setProfessional(Users professional) {
-        this.professional = professional;
+    public void setProfessional(Professionals professionals) {
+        this.professionals = professionals;
     }
 
     public ProfessionalType getServiceType() {

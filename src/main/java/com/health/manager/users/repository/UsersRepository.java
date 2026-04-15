@@ -10,8 +10,8 @@ import java.util.UUID;
 public interface UsersRepository extends JpaRepository<Users, UUID> {
 
     @EntityGraph(attributePaths = {
-            "studentProfile",
-            "professionalProfile"
+            "students",
+            "professionals"
 //            "studentsAsCoach",
 //            "studentsAsNutritionist",
 //            "receivedPayments"
