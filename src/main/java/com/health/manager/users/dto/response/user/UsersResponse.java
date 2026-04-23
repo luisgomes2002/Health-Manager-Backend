@@ -1,4 +1,4 @@
-package com.health.manager.users.response.user;
+package com.health.manager.users.dto.response.user;
 
 import com.health.manager.enums.Role;
 

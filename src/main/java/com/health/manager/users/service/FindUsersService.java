@@ -2,7 +2,7 @@ package com.health.manager.users.service;
 
 import com.health.manager.users.mapper.user.UsersMapper;
 import com.health.manager.users.repository.UsersRepository;
-import com.health.manager.users.response.user.UsersResponse;
+import com.health.manager.users.dto.response.user.UsersResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

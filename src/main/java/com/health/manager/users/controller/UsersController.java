@@ -1,8 +1,8 @@
 package com.health.manager.users.controller;
 
-import com.health.manager.users.request.CreateUserRequest;
-import com.health.manager.users.response.user.UserDetailsResponse;
-import com.health.manager.users.response.user.UsersResponse;
+import com.health.manager.users.dto.request.CreateUserRequest;
+import com.health.manager.users.dto.response.user.UserDetailsResponse;
+import com.health.manager.users.dto.response.user.UsersResponse;
 import com.health.manager.users.service.CreateUserService;
 import com.health.manager.users.service.FindUserDetailsService;
 import com.health.manager.users.service.FindUsersService;

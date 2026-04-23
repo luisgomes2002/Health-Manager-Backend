@@ -2,7 +2,7 @@ package com.health.manager.users.service;
 
 import com.health.manager.users.mapper.user.UserDetailsMapper;
 import com.health.manager.users.repository.UsersRepository;
-import com.health.manager.users.response.user.UserDetailsResponse;
+import com.health.manager.users.dto.response.user.UserDetailsResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -47,12 +47,12 @@ CREATE TABLE biometrics (
 CREATE TABLE health_records (
     id UUID PRIMARY KEY,
     student_id UUID UNIQUE NOT NULL,
-    health_issues TEXT,
-    hypertension TEXT,
-    diabetes TEXT,
-    cardiac_issues TEXT,
-    mental_health TEXT,
-    steroid_use TEXT,
+    health_issues VARCHAR(255),
+    hypertension VARCHAR(255),
+    diabetes VARCHAR(255),
+    cardiac_issues VARCHAR(255),
+    mental_health VARCHAR(255),
+    steroid_use VARCHAR(255),
     daily_medication BOOLEAN DEFAULT FALSE,
 
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
@@ -86,12 +86,12 @@ CREATE TABLE physical_training (
     student_id UUID UNIQUE NOT NULL,
     activity_level INT NOT NULL,
     weekly_frequency VARCHAR(255),
-    current_activities TEXT,
-    goals TEXT,
-    perceived_impact TEXT,
-    body_comfort TEXT,
-    exercise_restriction TEXT,
-    restricted_exercise TEXT,
+    current_activities VARCHAR(255),
+    goals VARCHAR(255),
+    perceived_impact VARCHAR(255),
+    body_comfort VARCHAR(255),
+    exercise_restriction VARCHAR(255),
+    restricted_exercise VARCHAR(255),
     preferred_shift VARCHAR(255),
 
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE

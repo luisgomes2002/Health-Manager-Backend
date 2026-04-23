@@ -1,4 +1,4 @@
-package com.health.manager.users.response.user;
+package com.health.manager.users.dto.response.user;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

@@ -1,45 +1,30 @@
-package com.health.manager.users.response.user;
+package com.health.manager.users.dto.request;
 
 import com.health.manager.enums.Role;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-public class UserDetailsResponse {
+public class CreateUserRequest {
 
-    private UUID id;
+    @NotBlank
     private String name;
+
+    @Email
+    @NotBlank
     private String email;
+
+    @NotNull
     private Role role;
+
+    @NotBlank
+    private String password;
+
     private LocalDateTime createdAt;
+
     private LocalDateTime updatedAt;
-
-    private StudenteResponse student;
-    private ProfessionalResponse professional;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public StudenteResponse getStudent() {
-        return student;
-    }
-
-    public void setStudent(StudenteResponse student) {
-        this.student = student;
-    }
-
-    public ProfessionalResponse getProfessional() {
-        return professional;
-    }
-
-    public void setProfessional(ProfessionalResponse professional) {
-        this.professional = professional;
-    }
 
     public String getName() {
         return name;
@@ -65,6 +50,14 @@ public class UserDetailsResponse {
         this.role = role;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -80,6 +73,4 @@ public class UserDetailsResponse {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-
 }

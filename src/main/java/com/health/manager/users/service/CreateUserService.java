@@ -3,8 +3,8 @@ package com.health.manager.users.service;
 import com.health.manager.users.entity.Users;
 import com.health.manager.users.mapper.user.CreateUserMapper;
 import com.health.manager.users.repository.UsersRepository;
-import com.health.manager.users.request.CreateUserRequest;
-import com.health.manager.users.response.user.UsersResponse;
+import com.health.manager.users.dto.request.CreateUserRequest;
+import com.health.manager.users.dto.response.user.UsersResponse;
 import org.springframework.stereotype.Service;
 
 @Service
