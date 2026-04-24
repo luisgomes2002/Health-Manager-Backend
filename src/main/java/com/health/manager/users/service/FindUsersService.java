@@ -19,7 +19,7 @@ public class FindUsersService {
     }
 
     public Page<UsersResponse> getAllUsers(Pageable pageable) {
-        return usersRepository.findAll(pageable)
+        return usersRepository.findAllByActiveTrue(pageable)
                 .map(users -> usersMapper.toResponse(users));
     }
 }

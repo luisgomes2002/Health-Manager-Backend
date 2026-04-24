@@ -1,30 +1,14 @@
-package com.health.manager.users.dto.response.user;
+package com.health.manager.users.dto.request;
 
 import com.health.manager.shared.enums.ProfessionalType;
 import com.health.manager.shared.enums.RegistrationType;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
+public class UpdateProfessionalRequest {
 
-public class ProfessionalResponse {
-
-    private UUID id;
     private ProfessionalType type;
     private RegistrationType registrationType;
     private String registrationId;
     private String specialty;
-    private List<SocialMediaResponse> socialMedia;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public ProfessionalType getType() {
         return type;
@@ -56,29 +40,5 @@ public class ProfessionalResponse {
 
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
-    }
-
-    public List<SocialMediaResponse> getSocialMedia() {
-        return socialMedia;
-    }
-
-    public void setSocialMedia(List<SocialMediaResponse> socialMedia) {
-        this.socialMedia = socialMedia;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

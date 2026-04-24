@@ -1,6 +1,6 @@
 package com.health.manager.anamnesis.entity;
 
-import com.health.manager.users.entity.Students;
+import com.health.manager.users.entity.Clients;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -13,8 +13,8 @@ public class FinancialConfig {
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "student_id", unique = true)
-    private Students students;
+    @JoinColumn(name = "client_id", unique = true)
+    private Clients clients;
 
     private Integer coachDueDate;
     private Integer nutritionistDueDate;
@@ -22,9 +22,9 @@ public class FinancialConfig {
     public FinancialConfig() {
     }
 
-    public FinancialConfig(UUID id, Students students, Integer coachDueDate, Integer nutritionistDueDate) {
+    public FinancialConfig(UUID id, Clients clients, Integer coachDueDate, Integer nutritionistDueDate) {
         this.id = id;
-        this.students = students;
+        this.clients = clients;
         this.coachDueDate = coachDueDate;
         this.nutritionistDueDate = nutritionistDueDate;
     }
@@ -37,12 +37,12 @@ public class FinancialConfig {
         this.id = id;
     }
 
-    public Students getStudent() {
-        return students;
+    public Clients getClient() {
+        return clients;
     }
 
-    public void setStudent(Students students) {
-        this.students = students;
+    public void setClient(Clients clients) {
+        this.clients = clients;
     }
 
     public Integer getCoachDueDate() {

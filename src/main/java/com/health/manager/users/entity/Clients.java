@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class Students {
+public class Clients {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -29,28 +30,31 @@ public class Students {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "students", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "clients", cascade = CascadeType.ALL)
     private Biometrics biometrics;
 
-    @OneToOne(mappedBy = "students", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "clients", cascade = CascadeType.ALL)
     private HealthRecords healthRecords;
 
-    @OneToOne(mappedBy = "students", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "clients", cascade = CascadeType.ALL)
     private Lifestyles lifestyles;
 
-    @OneToOne(mappedBy = "students", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "clients", cascade = CascadeType.ALL)
     private PhysicalTraining physicalTraining;
 
-    @OneToOne(mappedBy = "students", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "clients", cascade = CascadeType.ALL)
     private FinancialConfig financialConfig;
 
-    @OneToMany(mappedBy = "students")
+    @OneToMany(mappedBy = "clients")
     private List<Payments> payments = new ArrayList<>();
 
-    public Students() {
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SocialMedia> socialMedia = new ArrayList<>();
+
+    public Clients() {
     }
 
-    public Students(UUID id, Users user, Professionals coach, Professionals nutritionist, LocalDateTime createdAt, LocalDateTime updatedAt, Biometrics biometrics, HealthRecords healthRecords, Lifestyles lifestyles, PhysicalTraining physicalTraining, FinancialConfig financialConfig, List<Payments> payments) {
+    public Clients(UUID id, Users user, Professionals coach, Professionals nutritionist, LocalDateTime createdAt, LocalDateTime updatedAt, Biometrics biometrics, HealthRecords healthRecords, Lifestyles lifestyles, PhysicalTraining physicalTraining, FinancialConfig financialConfig, List<Payments> payments) {
         this.id = id;
         this.user = user;
         this.coach = coach;
@@ -159,5 +163,13 @@ public class Students {
 
     public void setPayments(List<Payments> payments) {
         this.payments = payments;
+    }
+
+    public List<SocialMedia> getSocialMedia() {
+        return socialMedia;
+    }
+
+    public void setSocialMedia(List<SocialMedia> socialMedia) {
+        this.socialMedia = socialMedia;
     }
 }

@@ -1,6 +1,6 @@
 package com.health.manager.users.dto.request;
 
-import com.health.manager.enums.Role;
+import com.health.manager.shared.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

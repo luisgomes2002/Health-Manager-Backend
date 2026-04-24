@@ -1,0 +1,380 @@
+{
+  "info": {
+    "name": "Health Manager API",
+    "_postman_id": "health-manager-api",
+    "description": "Coleção completa da API Health Manager",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "00000000-0000-0000-0000-000000000000",
+      "type": "string"
+    },
+    {
+      "key": "professionalId",
+      "value": "00000000-0000-0000-0000-000000000000",
+      "type": "string"
+    },
+    {
+      "key": "socialMediaId",
+      "value": "00000000-0000-0000-0000-000000000000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Listar usuários (paginado)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/?page=0&size=10&sort=name,asc",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", ""],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sort", "value": "name,asc" }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n      \"name\": \"João Silva\",\n      \"email\": \"joao@email.com\",\n      \"role\": \"CLIENT\",\n      \"createdAt\": \"2024-01-15T10:30:00\",\n      \"updatedAt\": \"2024-01-15T10:30:00\"\n    }\n  ],\n  \"totalElements\": 1,\n  \"totalPages\": 1,\n  \"size\": 10,\n  \"number\": 0\n}"
+            }
+          ]
+        },
+        {
+          "name": "Buscar usuário por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "{{userId}}"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"name\": \"João Silva\",\n  \"email\": \"joao@email.com\",\n  \"role\": \"CLIENT\",\n  \"createdAt\": \"2024-01-15T10:30:00\",\n  \"updatedAt\": \"2024-01-15T10:30:00\",\n  \"client\": {\n    \"id\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\",\n    \"coachId\": \"c3d4e5f6-a7b8-9012-cdef-123456789012\",\n    \"coachName\": \"Carlos Coach\",\n    \"nutritionistId\": null,\n    \"nutritionistName\": null,\n    \"socialMedia\": [\n      { \"id\": \"d4e5f6a7-b8c9-0123-defa-234567890123\", \"platform\": \"INSTAGRAM\", \"handle\": \"@joao.silva\", \"createdAt\": \"2024-01-15T11:00:00\" }\n    ],\n    \"createdAt\": \"2024-01-15T10:35:00\",\n    \"updatedAt\": \"2024-01-15T10:35:00\"\n  },\n  \"professional\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Criar usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "create"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao@email.com\",\n  \"role\": \"PROFESSIONAL\",\n  \"password\": \"senha123\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"name\": \"João Silva\",\n  \"email\": \"joao@email.com\",\n  \"role\": \"PROFESSIONAL\",\n  \"createdAt\": \"2024-01-15T10:30:00\",\n  \"updatedAt\": \"2024-01-15T10:30:00\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Atualizar usuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "{{userId}}"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"João Silva Atualizado\",\n  \"email\": \"joao.novo@email.com\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"name\": \"João Silva Atualizado\",\n  \"email\": \"joao.novo@email.com\",\n  \"role\": \"PROFESSIONAL\",\n  \"createdAt\": \"2024-01-15T10:30:00\",\n  \"updatedAt\": \"2024-01-15T11:00:00\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Deletar usuário (soft delete)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "{{userId}}"]
+            }
+          },
+          "response": [
+            {
+              "name": "204 No Content",
+              "status": "No Content",
+              "code": 204,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Alterar senha",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}/password",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "{{userId}}", "password"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"senha123\",\n  \"newPassword\": \"novaSenha456\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": [
+            {
+              "name": "204 No Content",
+              "status": "No Content",
+              "code": 204,
+              "body": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Perfil — Cliente",
+      "item": [
+        {
+          "name": "Atribuir perfil de cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}/client",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "{{userId}}", "client"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coachId\": \"c3d4e5f6-a7b8-9012-cdef-123456789012\",\n  \"nutritionistId\": null\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"name\": \"João Silva\",\n  \"email\": \"joao@email.com\",\n  \"role\": \"CLIENT\",\n  \"createdAt\": \"2024-01-15T10:30:00\",\n  \"updatedAt\": \"2024-01-15T10:30:00\",\n  \"client\": {\n    \"id\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\",\n    \"coachId\": \"c3d4e5f6-a7b8-9012-cdef-123456789012\",\n    \"coachName\": \"Carlos Coach\",\n    \"nutritionistId\": null,\n    \"nutritionistName\": null,\n    \"socialMedia\": [],\n    \"createdAt\": \"2024-01-15T10:35:00\",\n    \"updatedAt\": \"2024-01-15T10:35:00\"\n  },\n  \"professional\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Cadastrar cliente (pelo profissional)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{professionalId}}/register-client",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "{{professionalId}}", "register-client"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Maria Cliente\",\n  \"email\": \"maria@email.com\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"userId\": \"e5f6a7b8-c9d0-1234-efab-345678901234\",\n  \"name\": \"Maria Cliente\",\n  \"email\": \"maria@email.com\",\n  \"temporaryPassword\": \"a3f9bc12de\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Perfil — Profissional",
+      "item": [
+        {
+          "name": "Atribuir perfil de profissional",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}/professional",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "{{userId}}", "professional"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"COACH\",\n  \"registrationType\": \"CREF\",\n  \"registrationId\": \"123456-G/SP\",\n  \"specialty\": \"Musculação e Hipertrofia\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"id\": \"c3d4e5f6-a7b8-9012-cdef-123456789012\",\n  \"type\": \"COACH\",\n  \"registrationType\": \"CREF\",\n  \"registrationId\": \"123456-G/SP\",\n  \"specialty\": \"Musculação e Hipertrofia\",\n  \"socialMedia\": [],\n  \"createdAt\": \"2024-01-15T10:40:00\",\n  \"updatedAt\": \"2024-01-15T10:40:00\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Atualizar perfil de profissional",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}/professional",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "{{userId}}", "professional"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"specialty\": \"Musculação, Hipertrofia e Emagrecimento\",\n  \"registrationId\": \"654321-G/SP\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"id\": \"c3d4e5f6-a7b8-9012-cdef-123456789012\",\n  \"type\": \"COACH\",\n  \"registrationType\": \"CREF\",\n  \"registrationId\": \"654321-G/SP\",\n  \"specialty\": \"Musculação, Hipertrofia e Emagrecimento\",\n  \"socialMedia\": [],\n  \"createdAt\": \"2024-01-15T10:40:00\",\n  \"updatedAt\": \"2024-01-15T11:00:00\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Redes Sociais",
+      "item": [
+        {
+          "name": "Adicionar rede social ao cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}/client/social-media",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "{{userId}}", "client", "social-media"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"platform\": \"INSTAGRAM\",\n  \"handle\": \"@joao.silva\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"id\": \"d4e5f6a7-b8c9-0123-defa-234567890123\",\n  \"platform\": \"INSTAGRAM\",\n  \"handle\": \"@joao.silva\",\n  \"createdAt\": \"2024-01-15T11:00:00\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Adicionar rede social ao profissional",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}/professional/social-media",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "{{userId}}", "professional", "social-media"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"platform\": \"WHATSAPP\",\n  \"handle\": \"+5511999999999\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"id\": \"e5f6a7b8-c9d0-1234-efab-345678901234\",\n  \"platform\": \"WHATSAPP\",\n  \"handle\": \"+5511999999999\",\n  \"createdAt\": \"2024-01-15T11:05:00\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Remover rede social",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/social-media/{{socialMediaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "social-media", "{{socialMediaId}}"]
+            }
+          },
+          "response": [
+            {
+              "name": "204 No Content",
+              "status": "No Content",
+              "code": 204,
+              "body": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

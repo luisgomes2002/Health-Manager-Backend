@@ -1,6 +1,6 @@
 package com.health.manager.anamnesis.entity;
 
-import com.health.manager.users.entity.Students;
+import com.health.manager.users.entity.Clients;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -15,8 +15,8 @@ public class HealthRecords {
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "student_id", unique = true)
-    private Students students;
+    @JoinColumn(name = "client_id", unique = true)
+    private Clients clients;
 
     private String healthIssues;
     private String hypertension;
@@ -33,9 +33,9 @@ public class HealthRecords {
     public HealthRecords() {
     }
 
-    public HealthRecords(UUID id, Students students, String healthIssues, String hypertension, String diabetes, String cardiacIssues, String mentalHealth, String steroidUse, Boolean dailyMedication, List<Medications> medications) {
+    public HealthRecords(UUID id, Clients clients, String healthIssues, String hypertension, String diabetes, String cardiacIssues, String mentalHealth, String steroidUse, Boolean dailyMedication, List<Medications> medications) {
         this.id = id;
-        this.students = students;
+        this.clients = clients;
         this.healthIssues = healthIssues;
         this.hypertension = hypertension;
         this.diabetes = diabetes;
@@ -54,12 +54,12 @@ public class HealthRecords {
         this.id = id;
     }
 
-    public Students getStudent() {
-        return students;
+    public Clients getClient() {
+        return clients;
     }
 
-    public void setStudent(Students students) {
-        this.students = students;
+    public void setClient(Clients clients) {
+        this.clients = clients;
     }
 
     public String getHealthIssues() {

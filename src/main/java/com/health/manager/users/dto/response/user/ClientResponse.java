@@ -1,9 +1,11 @@
 package com.health.manager.users.dto.response.user;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
-public class StudenteResponse {
+public class ClientResponse {
+
     private UUID id;
 
     private UUID coachId;
@@ -11,6 +13,8 @@ public class StudenteResponse {
 
     private UUID nutritionistId;
     private String nutritionistName;
+
+    private List<SocialMediaResponse> socialMedia;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -53,6 +57,14 @@ public class StudenteResponse {
 
     public void setNutritionistName(String nutritionistName) {
         this.nutritionistName = nutritionistName;
+    }
+
+    public List<SocialMediaResponse> getSocialMedia() {
+        return socialMedia;
+    }
+
+    public void setSocialMedia(List<SocialMediaResponse> socialMedia) {
+        this.socialMedia = socialMedia;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -1,6 +1,6 @@
 package com.health.manager.users.dto.response.user;
 
-import com.health.manager.enums.Role;
+import com.health.manager.shared.enums.Role;
 
 import java.time.LocalDateTime;
 

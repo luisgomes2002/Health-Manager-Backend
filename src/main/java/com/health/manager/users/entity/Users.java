@@ -1,6 +1,6 @@
 package com.health.manager.users.entity;
 
-import com.health.manager.enums.Role;
+import com.health.manager.shared.enums.Role;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,6 +25,9 @@ public class Users {
 
     private String password;
 
+    @Column(nullable = false)
+    private boolean active = true;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -34,7 +37,7 @@ public class Users {
     private LocalDateTime updatedAt;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Students students;
+    private Clients clients;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Professionals professionals;
@@ -42,15 +45,16 @@ public class Users {
     public Users() {
     }
 
-    public Users(UUID id, String name, String email, Role role, String password, LocalDateTime createdAt, LocalDateTime updatedAt, Students students, Professionals professionals) {
+    public Users(UUID id, String name, String email, Role role, String password, boolean active, LocalDateTime createdAt, LocalDateTime updatedAt, Clients clients, Professionals professionals) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.role = role;
         this.password = password;
+        this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.students = students;
+        this.clients = clients;
         this.professionals = professionals;
     }
 
@@ -94,6 +98,14 @@ public class Users {
         this.password = password;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -110,12 +122,12 @@ public class Users {
         this.updatedAt = updatedAt;
     }
 
-    public Students getStudent() {
-        return students;
+    public Clients getClient() {
+        return clients;
     }
 
-    public void setStudent(Students students) {
-        this.students = students;
+    public void setClient(Clients clients) {
+        this.clients = clients;
     }
 
     public Professionals getProfessional() {

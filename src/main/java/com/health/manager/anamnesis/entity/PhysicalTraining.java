@@ -1,19 +1,20 @@
 package com.health.manager.anamnesis.entity;
 
-import com.health.manager.users.entity.Students;
+import com.health.manager.users.entity.Clients;
 import jakarta.persistence.*;
 
 import java.util.UUID;
 
 @Entity
 public class PhysicalTraining {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "student_id", unique = true)
-    private Students students;
+    @JoinColumn(name = "client_id", unique = true)
+    private Clients clients;
 
     private Integer activityLevel;
     private String weeklyFrequency;
@@ -28,9 +29,9 @@ public class PhysicalTraining {
     public PhysicalTraining() {
     }
 
-    public PhysicalTraining(UUID id, Students students, Integer activityLevel, String weeklyFrequency, String currentActivities, String goals, String perceivedImpact, String bodyComfort, String exerciseRestriction, String restrictedExercise, String preferredShift) {
+    public PhysicalTraining(UUID id, Clients clients, Integer activityLevel, String weeklyFrequency, String currentActivities, String goals, String perceivedImpact, String bodyComfort, String exerciseRestriction, String restrictedExercise, String preferredShift) {
         this.id = id;
-        this.students = students;
+        this.clients = clients;
         this.activityLevel = activityLevel;
         this.weeklyFrequency = weeklyFrequency;
         this.currentActivities = currentActivities;
@@ -50,12 +51,12 @@ public class PhysicalTraining {
         this.id = id;
     }
 
-    public Students getStudent() {
-        return students;
+    public Clients getClient() {
+        return clients;
     }
 
-    public void setStudent(Students students) {
-        this.students = students;
+    public void setClient(Clients clients) {
+        this.clients = clients;
     }
 
     public Integer getActivityLevel() {

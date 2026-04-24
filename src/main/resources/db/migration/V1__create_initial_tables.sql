@@ -4,6 +4,7 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE NOT NULL,
     role VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -21,7 +22,7 @@ CREATE TABLE professionals (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE students (
+CREATE TABLE clients (
     id UUID PRIMARY KEY,
     user_id UUID UNIQUE NOT NULL,
     coach_id UUID,
@@ -36,17 +37,17 @@ CREATE TABLE students (
 
 CREATE TABLE biometrics (
     id UUID PRIMARY KEY,
-    student_id UUID UNIQUE NOT NULL,
+    client_id UUID UNIQUE NOT NULL,
     date_of_birth TIMESTAMP NOT NULL,
     biological_sex VARCHAR(50) NOT NULL,
     menstrual_cycle_impact VARCHAR(255),
 
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
 
 CREATE TABLE health_records (
     id UUID PRIMARY KEY,
-    student_id UUID UNIQUE NOT NULL,
+    client_id UUID UNIQUE NOT NULL,
     health_issues VARCHAR(255),
     hypertension VARCHAR(255),
     diabetes VARCHAR(255),
@@ -55,7 +56,7 @@ CREATE TABLE health_records (
     steroid_use VARCHAR(255),
     daily_medication BOOLEAN DEFAULT FALSE,
 
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
 
 CREATE TABLE medications (
@@ -71,19 +72,19 @@ CREATE TABLE medications (
 
 CREATE TABLE lifestyles (
     id UUID PRIMARY KEY,
-    student_id UUID UNIQUE NOT NULL,
+    client_id UUID UNIQUE NOT NULL,
     stress_level VARCHAR(255),
     sleep_hours VARCHAR(255),
     diet_quality VARCHAR(255),
     alcohol_consumption VARCHAR(255),
     smoking VARCHAR(255),
 
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
 
 CREATE TABLE physical_training (
     id UUID PRIMARY KEY,
-    student_id UUID UNIQUE NOT NULL,
+    client_id UUID UNIQUE NOT NULL,
     activity_level INT NOT NULL,
     weekly_frequency VARCHAR(255),
     current_activities VARCHAR(255),
@@ -94,12 +95,12 @@ CREATE TABLE physical_training (
     restricted_exercise VARCHAR(255),
     preferred_shift VARCHAR(255),
 
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
 
 CREATE TABLE payments (
     id UUID PRIMARY KEY,
-    student_id UUID NOT NULL,
+    client_id UUID NOT NULL,
     professional_id UUID NOT NULL,
     service_type VARCHAR(50) NOT NULL,
     amount NUMERIC(10,2),
@@ -108,15 +109,16 @@ CREATE TABLE payments (
     status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
     created_at TIMESTAMP DEFAULT NOW(),
 
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE,
     FOREIGN KEY (professional_id) REFERENCES professionals(id)
 );
 
 CREATE TABLE financial_config (
     id UUID PRIMARY KEY,
-    student_id UUID UNIQUE NOT NULL,
+    client_id UUID UNIQUE NOT NULL,
     coach_due_date INT,
     nutritionist_due_date INT,
 
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
+

@@ -1,9 +1,9 @@
 package com.health.manager.anamnesis.entity;
 
-import com.health.manager.enums.PaymentStatus;
-import com.health.manager.enums.ProfessionalType;
+import com.health.manager.shared.enums.PaymentStatus;
+import com.health.manager.shared.enums.ProfessionalType;
+import com.health.manager.users.entity.Clients;
 import com.health.manager.users.entity.Professionals;
-import com.health.manager.users.entity.Students;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -18,8 +18,8 @@ public class Payments {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Students students;
+    @JoinColumn(name = "client_id")
+    private Clients clients;
 
     @ManyToOne
     @JoinColumn(name = "professional_id")
@@ -42,9 +42,9 @@ public class Payments {
     public Payments() {
     }
 
-    public Payments(UUID id, Students students, Professionals professionals, ProfessionalType serviceType, BigDecimal amount, LocalDateTime dueDate, LocalDateTime paymentDate, PaymentStatus status, LocalDateTime createdAt) {
+    public Payments(UUID id, Clients clients, Professionals professionals, ProfessionalType serviceType, BigDecimal amount, LocalDateTime dueDate, LocalDateTime paymentDate, PaymentStatus status, LocalDateTime createdAt) {
         this.id = id;
-        this.students = students;
+        this.clients = clients;
         this.professionals = professionals;
         this.serviceType = serviceType;
         this.amount = amount;
@@ -62,12 +62,12 @@ public class Payments {
         this.id = id;
     }
 
-    public Students getStudent() {
-        return students;
+    public Clients getClient() {
+        return clients;
     }
 
-    public void setStudent(Students students) {
-        this.students = students;
+    public void setClient(Clients clients) {
+        this.clients = clients;
     }
 
     public Professionals getProfessional() {

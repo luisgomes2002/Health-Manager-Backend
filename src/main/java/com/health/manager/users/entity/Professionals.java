@@ -1,8 +1,8 @@
 package com.health.manager.users.entity;
 
 import com.health.manager.anamnesis.entity.Payments;
-import com.health.manager.enums.ProfessionalType;
-import com.health.manager.enums.RegistrationType;
+import com.health.manager.shared.enums.ProfessionalType;
+import com.health.manager.shared.enums.RegistrationType;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -35,18 +35,21 @@ public class Professionals {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "coach")
-    private List<Students> coachedStudents = new ArrayList<>();
+    private List<Clients> coachedClients = new ArrayList<>();
 
     @OneToMany(mappedBy = "nutritionist")
-    private List<Students> nutritionStudents = new ArrayList<>();
+    private List<Clients> nutritionClients = new ArrayList<>();
 
     @OneToMany(mappedBy = "professionals")
     private List<Payments> receivedPayments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "professional", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SocialMedia> socialMedia = new ArrayList<>();
+
     public Professionals() {
     }
 
-    public Professionals(UUID id, Users user, ProfessionalType type, RegistrationType registrationType, String registrationId, String specialty, LocalDateTime createdAt, LocalDateTime updatedAt, List<Students> coachedStudents, List<Students> nutritionStudents, List<Payments> receivedPayments) {
+    public Professionals(UUID id, Users user, ProfessionalType type, RegistrationType registrationType, String registrationId, String specialty, LocalDateTime createdAt, LocalDateTime updatedAt, List<Clients> coachedClients, List<Clients> nutritionClients, List<Payments> receivedPayments) {
         this.id = id;
         this.user = user;
         this.type = type;
@@ -55,8 +58,8 @@ public class Professionals {
         this.specialty = specialty;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.coachedStudents = coachedStudents;
-        this.nutritionStudents = nutritionStudents;
+        this.coachedClients = coachedClients;
+        this.nutritionClients = nutritionClients;
         this.receivedPayments = receivedPayments;
     }
 
@@ -124,20 +127,20 @@ public class Professionals {
         this.updatedAt = updatedAt;
     }
 
-    public List<Students> getCoachedStudents() {
-        return coachedStudents;
+    public List<Clients> getCoachedClients() {
+        return coachedClients;
     }
 
-    public void setCoachedStudents(List<Students> coachedStudents) {
-        this.coachedStudents = coachedStudents;
+    public void setCoachedClients(List<Clients> coachedClients) {
+        this.coachedClients = coachedClients;
     }
 
-    public List<Students> getNutritionStudents() {
-        return nutritionStudents;
+    public List<Clients> getNutritionClients() {
+        return nutritionClients;
     }
 
-    public void setNutritionStudents(List<Students> nutritionStudents) {
-        this.nutritionStudents = nutritionStudents;
+    public void setNutritionClients(List<Clients> nutritionClients) {
+        this.nutritionClients = nutritionClients;
     }
 
     public List<Payments> getReceivedPayments() {
@@ -146,5 +149,13 @@ public class Professionals {
 
     public void setReceivedPayments(List<Payments> receivedPayments) {
         this.receivedPayments = receivedPayments;
+    }
+
+    public List<SocialMedia> getSocialMedia() {
+        return socialMedia;
+    }
+
+    public void setSocialMedia(List<SocialMedia> socialMedia) {
+        this.socialMedia = socialMedia;
     }
 }

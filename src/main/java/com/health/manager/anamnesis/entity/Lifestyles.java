@@ -1,19 +1,20 @@
 package com.health.manager.anamnesis.entity;
 
-import com.health.manager.users.entity.Students;
+import com.health.manager.users.entity.Clients;
 import jakarta.persistence.*;
 
 import java.util.UUID;
 
 @Entity
 public class Lifestyles {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "student_id", unique = true)
-    private Students students;
+    @JoinColumn(name = "client_id", unique = true)
+    private Clients clients;
 
     private String stressLevel;
     private String sleepHours;
@@ -24,9 +25,9 @@ public class Lifestyles {
     public Lifestyles() {
     }
 
-    public Lifestyles(UUID id, Students students, String stressLevel, String sleepHours, String dietQuality, String alcoholConsumption, String smoking) {
+    public Lifestyles(UUID id, Clients clients, String stressLevel, String sleepHours, String dietQuality, String alcoholConsumption, String smoking) {
         this.id = id;
-        this.students = students;
+        this.clients = clients;
         this.stressLevel = stressLevel;
         this.sleepHours = sleepHours;
         this.dietQuality = dietQuality;
@@ -42,12 +43,12 @@ public class Lifestyles {
         this.id = id;
     }
 
-    public Students getStudent() {
-        return students;
+    public Clients getClient() {
+        return clients;
     }
 
-    public void setStudent(Students students) {
-        this.students = students;
+    public void setClient(Clients clients) {
+        this.clients = clients;
     }
 
     public String getStressLevel() {
