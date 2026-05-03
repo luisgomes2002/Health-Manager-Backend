@@ -3,10 +3,13 @@ package com.health.manager.users.controller;
 import com.health.manager.users.dto.request.*;
 import com.health.manager.users.dto.response.user.*;
 import com.health.manager.users.service.*;
+import com.health.manager.auth.model.AuthenticatedUser;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -59,12 +62,14 @@ public class UsersController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN')")
     public Page<UsersResponse> getAllUsers(Pageable pageable) {
         return findUsersService.getAllUsers(pageable);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN') or authentication.principal.userId().toString() == #id.toString()")
     public UserDetailsResponse getUserDetails(@PathVariable UUID id) {
         return findUserDetailsService.getUserDetails(id);
     }
@@ -77,24 +82,28 @@ public class UsersController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN') or authentication.principal.userId().toString() == #id.toString()")
     public UsersResponse updateUser(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequest request) {
         return updateUserService.updateUser(id, request);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(@PathVariable UUID id) {
         deleteUserService.deleteUser(id);
     }
 
     @PatchMapping("/{id}/password")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("authentication.principal.userId().toString() == #id.toString()")
     public void changePassword(@PathVariable UUID id, @RequestBody @Valid ChangePasswordRequest request) {
         changePasswordService.changePassword(id, request);
     }
 
     @PostMapping("/{id}/client")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public UserDetailsResponse assignClientProfile(@PathVariable UUID id,
                                                    @RequestBody AssignClientProfileRequest request) {
         return assignClientProfileService.assignClientProfile(id, request);
@@ -102,6 +111,7 @@ public class UsersController {
 
     @PostMapping("/{id}/professional")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public ProfessionalResponse assignProfessionalProfile(@PathVariable UUID id,
                                                           @RequestBody @Valid AssignProfessionalProfileRequest request) {
         return assignProfessionalProfileService.assignProfessionalProfile(id, request);
@@ -109,6 +119,7 @@ public class UsersController {
 
     @PutMapping("/{id}/professional")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN') or authentication.principal.userId().toString() == #id.toString()")
     public ProfessionalResponse updateProfessional(@PathVariable UUID id,
                                                    @RequestBody UpdateProfessionalRequest request) {
         return updateProfessionalService.updateProfessional(id, request);
@@ -116,6 +127,7 @@ public class UsersController {
 
     @PostMapping("/{professionalId}/register-client")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('PROFESSIONAL') and authentication.principal.userId().toString() == #professionalId.toString())")
     public RegisterClientResponse registerClient(@PathVariable UUID professionalId,
                                                  @RequestBody @Valid RegisterClientRequest request) {
         return registerClientService.registerClient(professionalId, request);
@@ -123,6 +135,7 @@ public class UsersController {
 
     @PostMapping("/{id}/client/social-media")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN') or authentication.principal.userId().toString() == #id.toString()")
     public SocialMediaResponse addClientSocialMedia(@PathVariable UUID id,
                                                     @RequestBody @Valid AddSocialMediaRequest request) {
         return addClientSocialMediaService.addClientSocialMedia(id, request);
@@ -130,6 +143,7 @@ public class UsersController {
 
     @PostMapping("/{id}/professional/social-media")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN') or authentication.principal.userId().toString() == #id.toString()")
     public SocialMediaResponse addProfessionalSocialMedia(@PathVariable UUID id,
                                                           @RequestBody @Valid AddSocialMediaRequest request) {
         return addProfessionalSocialMediaService.addProfessionalSocialMedia(id, request);
@@ -137,7 +151,8 @@ public class UsersController {
 
     @DeleteMapping("/social-media/{socialMediaId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteSocialMedia(@PathVariable UUID socialMediaId) {
-        deleteSocialMediaService.deleteSocialMedia(socialMediaId);
+    @PreAuthorize("isAuthenticated()")
+    public void deleteSocialMedia(@PathVariable UUID socialMediaId, @AuthenticationPrincipal AuthenticatedUser currentUser) {
+        deleteSocialMediaService.deleteSocialMedia(socialMediaId, currentUser);
     }
 }

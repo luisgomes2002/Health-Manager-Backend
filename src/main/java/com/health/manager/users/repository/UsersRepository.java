@@ -15,6 +15,8 @@ public interface UsersRepository extends JpaRepository<Users, UUID> {
 
     boolean existsByEmail(String email);
 
+    Optional<Users> findByEmail(String email);
+
     @EntityGraph(attributePaths = {
             "clients",
             "professionals"

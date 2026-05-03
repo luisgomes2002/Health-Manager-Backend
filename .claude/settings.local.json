@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find E:\\\\\\\\-- Backup --\\\\\\\\Projects\\\\\\\\health-manager\\\\\\\\manager\\\\\\\\src\\\\\\\\main\\\\\\\\resources *)",
+      "Bash(find \"E:\\\\\\\\-- Backup --\\\\\\\\Projects\\\\\\\\health-manager\\\\\\\\manager\\\\\\\\src\\\\\\\\main\\\\\\\\java\\\\\\\\com\\\\\\\\health\\\\\\\\manager\\\\\\\\users\\\\\\\\dto\\\\\\\\request\" -name \"*Login*\" -o -name \"*Auth*\" -o -name \"*Login*\")",
+      "Bash(ls *)",
+      "Bash(find \"E:\\\\\\\\-- Backup --\\\\\\\\Projects\\\\\\\\health-manager\\\\\\\\manager\\\\\\\\src\\\\\\\\main\\\\\\\\java\\\\\\\\com\\\\\\\\health\\\\\\\\manager\" -type d)",
+      "Bash(find \"E:\\\\\\\\-- Backup --\\\\\\\\Projects\\\\\\\\health-manager\\\\\\\\manager\\\\\\\\src\\\\\\\\main\\\\\\\\java\\\\\\\\com\\\\\\\\health\\\\\\\\manager\" -type f -name \"*.java\")",
+      "Bash(xargs grep *)",
+      "Bash(find \"E:\\\\\\\\-- Backup --\\\\\\\\Projects\\\\\\\\health-manager\\\\\\\\manager\" -type d -name \"src\")",
+      "Bash(cat \"E:\\\\\\\\-- Backup --\\\\\\\\Projects\\\\\\\\health-manager\\\\\\\\manager\\\\\\\\pom.xml\")"
+    ]
+  }
+}

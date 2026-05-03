@@ -8,6 +8,7 @@ import com.health.manager.users.entity.Clients;
 import com.health.manager.users.entity.Users;
 import com.health.manager.users.repository.ClientsRepository;
 import com.health.manager.users.repository.UsersRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +20,12 @@ public class RegisterClientService {
 
     private final UsersRepository usersRepository;
     private final ClientsRepository clientsRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public RegisterClientService(UsersRepository usersRepository, ClientsRepository clientsRepository) {
+    public RegisterClientService(UsersRepository usersRepository, ClientsRepository clientsRepository, BCryptPasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.clientsRepository = clientsRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
@@ -45,7 +48,7 @@ public class RegisterClientService {
         clientUser.setName(request.getName());
         clientUser.setEmail(request.getEmail());
         clientUser.setRole(Role.CLIENT);
-        clientUser.setPassword(generatedPassword);
+        clientUser.setPassword(passwordEncoder.encode(generatedPassword));
         var savedUser = usersRepository.save(clientUser);
 
         var client = new Clients();
