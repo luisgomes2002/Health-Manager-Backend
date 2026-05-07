@@ -4,13 +4,31 @@ services:
     container_name: postgres_health_manager
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: teste
-      POSTGRES_DB: health-manager-db
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-teste}
+      POSTGRES_DB: ${DB_NAME:-health-manager-db}
     ports:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: health-manager-api
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-teste}
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-health-manager-db}
+      DB_USER: ${DB_USER:-postgres}
+    ports:
+      - '8080:8080'
 
   redis:
     container_name: redis-health-manager

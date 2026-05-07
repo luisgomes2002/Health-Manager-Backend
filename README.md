@@ -87,6 +87,41 @@ java -jar target/manager-*.jar
 
 O Flyway aplicará as migrações automaticamente ao iniciar. A API estará em `http://localhost:8080`.
 
+### Executando com Docker (API + PostgreSQL)
+
+1. Crie seu arquivo de ambiente baseado no exemplo:
+
+```bash
+cp .env.example .env
+```
+
+2. Suba os containers com build da API:
+
+```bash
+docker compose up -d --build
+```
+
+3. Acompanhe os logs da API:
+
+```bash
+docker compose logs -f app
+```
+
+4. Para parar tudo:
+
+```bash
+docker compose down
+```
+
+5. Para rebuild completo da API:
+
+```bash
+docker compose build --no-cache app
+docker compose up -d
+```
+
+Com Docker Compose, a API conecta no Postgres usando o host interno `postgres` e expõe a aplicação em `http://localhost:8080`.
+
 ---
 
 ## Endpoints da API

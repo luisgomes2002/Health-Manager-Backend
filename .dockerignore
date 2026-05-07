@@ -1,0 +1,9 @@
+target/
+.git/
+.gitignore
+README.md
+health-manager.postman_collection.json
+.env
+.env.*
+!.env.example
+mvnw.cmd
